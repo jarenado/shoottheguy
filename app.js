@@ -1,6 +1,7 @@
-var numOfEnemies = 7;
-var battlefield = document.querySelector(".app");
-var pos = 0;
+var numOfEnemies = 7,
+    battlefield = document.querySelector(".app"),
+    pos = 0,
+    score = 0;
 
 function createEnemies(num) {
   for (i=0;i < num; i++) {
@@ -16,20 +17,33 @@ function createEnemies(num) {
   }
 }
 
+function updateScore() {
+  score++;
+  console.log(score);
+  var scoreboard = document.getElementsByClassName("scoreboard");
+  console.log('scoreboard', scoreboard);
+  scoreboard[0].innerHTML =  score; 
+
+}
+
+function killGuy() {
+  //kill guy
+  //update score
+}
+
 function attachHandler(enemy) {
   enemy.onclick = function(e) {
     e.target.className += " poof";
+    updateScore();
   }
 }
 
 function attack(enemy, pos) {
-  console.log('pos', pos)
   pos = pos + 10;
   enemy.style.top = pos + "px"
   setTimeout(function(){
     attack(enemy, pos)
   }, 500);
 }
-
 
 createEnemies(numOfEnemies);
