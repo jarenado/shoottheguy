@@ -1,27 +1,44 @@
+var numOfEnemies = 7;
 var battlefield = document.querySelector(".app");
-var enemy = document.createElement("div");
-enemy.className = "enemy1";
 var pos = 0;
 
-battlefield.appendChild(enemy);
-
-document.querySelector(".enemy1").onclick = function(e, timer1){
-  clearTimeout(timer1);
-  var enemy = e.target;
-  enemy.className += " poof"
-}
-
-function attack() {
-  if (pos == 500) {
-    clearTimeout(timer1);
-  } else {
-    pos = pos + 10;
-    console.log(pos);
-    var enemy = document.querySelector(".enemy1");
-    enemy.style.top = pos + "px";
-    var timer1 = setTimeout(attack, 100);
+function createEnemies(num) {
+  for (i=0;i < num; i++) {
+    var enemy = document.createElement("div");
+    var getPosition = Math.floor((Math.random() * 100) + 1) * 3;
+    enemy.className = "enemy enemy" + i; 
+    enemy.style.left = 120 * i + "px";
+    enemy.style.top = "-" + getPosition + "px";
+    pos = getPosition;
+    battlefield.appendChild(enemy);
+    attack(enemy, pos);
   }
 }
 
+function attack(enemy, pos) {
+  console.log('pos', pos)
+  pos = pos + 10;
+  enemy.style.top = pos + "px"
+  /* var enemies = document.getElementsByClassName('enemy');*/
+  /* for (i = 1;i < enemies.length; i++) {*/
+  /* var enemy = enemies[i];*/
+  /* if (pos == 450) {*/
+  /* console.log('stop');*/
+  /* } else {*/
+  /* pos = pos + 10;*/
+  /* enemy.style.top = pos + "px";*/
+  /* console.log(enemy);*/
+  /* }*/
+  /* }*/
+  setTimeout(function(){
+    attack(enemy, pos)
+  }, 500);
+}
+/* document.querySelector(".enemy").onclick = function(e, timer1){
+ *   clearTimeout(timer1);
+ *   var enemy = e.target;
+ *   enemy.className += " poof"
+ * }*/
 
+createEnemies(numOfEnemies);
 attack();
