@@ -1,3 +1,5 @@
+require('./sass/index.scss');
+
 var numOfEnemies = 4,
     battlefield = document.querySelector(".app"),
     pos = 0,
