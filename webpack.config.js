@@ -1,14 +1,20 @@
 var webpack = require("webpack");
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/app.js",
   output: {
     filename: "bundle.js"
   },
   module: {
     rules: [
+      { // babel
+        test: /\.js|jsx$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      },
       { // regular css files
         test: /\.css$/,
         exclude: /node_modules/,
