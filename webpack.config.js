@@ -21,6 +21,12 @@ module.exports = {
         use: 'css-loader'
       },
 
+      { // regular mp3 files
+        test: /\.mp3|.png$/,
+        exclude: /node_modules/,
+        use: 'file-loader'
+      },
+
       { // sass / scss loader for webpack
         test: /\.(sass|scss)$/,
         exclude: /node_modules/,
